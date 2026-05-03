@@ -4,6 +4,7 @@ import logging.handlers
 import signal
 import os
 import argparse
+import json
 from asyncio import StreamReader, StreamWriter
 from aiohttp import web
 from logging import config  # noqa F401
@@ -159,13 +160,19 @@ def main():   # pragma: no cover
     os.makedirs(args.log_path, exist_ok=True)
 
     src_dir = os.path.dirname(__file__) + '/'
-    logging.config.fileConfig(src_dir + 'logging.ini')
+
+    # onkel_enno: load config from json to work around ignored backupCount
+    with open(f"{args.config_path}/logging.json", "r") as f:
+        config_dict = json.load(f)
+        logging.config.dictConfig(config_dict)
+    # :onkel_enno
+
     logging.info(f'Server "{serv_name} - {version}" will be started')
     logging.info(f'current dir: {os.getcwd()}')
     logging.info(f"config_path: {args.config_path}")
     logging.info(f"json_config: {args.json_config}")
     logging.info(f"toml_config: {args.toml_config}")
-    logging.info(f"log_path:    {args.log_path}")
+    logging.info(f"log_path   : {args.log_path}")
     if args.log_backups == 0:
         logging.info("log_backups: unlimited")
     else:

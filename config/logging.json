@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "loggers": {
+    "root": {
+      "level": "INFO",
+      "handlers": [
+        "console_handler",
+        "file_handler_proxy"
+      ]
+    },
+    "conn": {
+      "level": "INFO",
+      "handlers": [
+        "console_handler",
+        "file_handler_proxy"
+      ],
+      "propagate": false
+    },
+    "mqtt": {
+      "level": "INFO",
+      "handlers": [
+        "console_handler",
+        "file_handler_proxy"
+      ],
+      "propagate": false
+    },
+    "asyncio": {
+      "level": "INFO",
+      "handlers": [
+        "console_handler",
+        "file_handler_proxy"
+      ],
+      "propagate": false
+    },
+    "data": {
+      "level": "INFO",
+      "handlers": [
+        "file_handler_proxy"
+      ],
+      "propagate": false
+    },
+    "msg": {
+      "level": "INFO",
+      "handlers": [
+        "file_handler_trace"
+      ],
+      "propagate": false
+    },
+    "tracer": {
+      "level": "WARN",
+      "handlers": [
+        "file_handler_trace"
+      ],
+      "propagate": false
+    }
+  },
+  "handlers": {
+    "console_handler": {
+      "class": "logging.StreamHandler",
+      "level": "DEBUG",
+      "formatter": "console_formatter"
+    },
+    "file_handler_proxy": {
+      "class": "logging.handlers.TimedRotatingFileHandler",
+      "level": "DEBUG",
+      "formatter": "file_formatter",
+      "filename": "/var/log/tsun.proxy.oe/proxy.log",
+      "when": "midnight",
+      "backupCount": 2
+    },
+    "file_handler_trace": {
+      "class": "logging.handlers.TimedRotatingFileHandler",
+      "level": "DEBUG",
+      "formatter": "file_formatter",
+      "filename": "/var/log/tsun.proxy.oe/trace.log",
+      "when": "midnight",
+      "backupCount": 2
+    }
+  },
+  "formatters": {
+    "console_formatter": {
+      "format": "%(levelname)-7s - %(name)4s - %(message)s",
+      "datefmt": "%Y-%m-%d %H:%M:%S"
+    },
+    "file_formatter": {
+      "format": "%(asctime)s - %(levelname)-7s - %(name)4s - %(message)s",
+      "datefmt": "%Y-%m-%d %H:%M:%S"
+    }
+  }
+}
