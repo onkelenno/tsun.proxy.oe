@@ -9,14 +9,14 @@ solarman.host    = 'iot.talent-monitoring.com'
 solarman.port    = 10000
 
 # mqtt broker configuration
-mqtt.host    = '127.0.0.1' # URL or IP address of the mqtt broker
-mqtt.port    = 1883
-mqtt.user    = 'tsun'
-mqtt.passwd  = 'TSUN'
+# mqtt.host    = '127.0.0.1' # URL or IP address of the mqtt broker
+# mqtt.port    = 1883
+# mqtt.user    = 'tsun'
+# mqtt.passwd  = 'TSUN'
 
 # home-assistant
 ha.auto_conf_prefix = 'homeassistant'       # MQTT prefix for subscribing for homeassistant status updates
-ha.discovery_prefix = 'homeassistant'       # MQTT prefix for discovery topic 
+ha.discovery_prefix = 'homeassistant'       # MQTT prefix for discovery topic
 ha.entity_prefix    = 'tsun'                # MQTT topic prefix for publishing inverter values
 ha.proxy_node_id    = 'proxy'               # MQTT node id, for the proxy_node_id
 ha.proxy_unique_id  = 'P170000000000001'    # MQTT unique id, to identify a proxy instance

@@ -4,9 +4,18 @@
 
 # pip3 install --break-system-packages quart-babel aiomqtt aiocron
 
-SCRIPT_DIR=$(dirname "$0")
+SCRIPT_DIR=$(dirname "$(readlink --canonicalize "$0")")
 
 export SERVICE_NAME="tsun.proxy.oe"
-export VERSION=$(cat "$SCRIPT_DIR/app/.version")
+VERSION=$(cat "$SCRIPT_DIR/app/.version")
+export VERSION
 
-python3 "$SCRIPT_DIR/app/src/server.py" --config_path "$SCRIPT_DIR/config/" --log_path "/var/log/tsun.proxy.oe/" --log_backups 2
+# shellcheck disable=SC1091
+source /home/enrico/scripts/passwordsafe.sh
+
+export MQTT_HOST=$TSUN_MQTT_HOST
+export MQTT_PORT=$TSUN_MQTT_PORT
+export MQTT_USER=$TSUN_MQTT_USER
+export MQTT_PASSWORD=$TSUN_MQTT_PWD
+
+python3 "$SCRIPT_DIR/app/src/server.py" --config_path "$SCRIPT_DIR/config/"
