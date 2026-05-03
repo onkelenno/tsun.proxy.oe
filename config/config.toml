@@ -1,0 +1,59 @@
+# configuration to reach tsun cloud
+tsun.enabled = true        # false: disables connecting to the tsun cloud, and avoids updates
+tsun.host    = 'logger.talent-monitoring.com'
+tsun.port    = 5005
+
+# configuration to reach the new tsun cloud for G3 Plus inverters
+solarman.enabled = true    # false: disables connecting to the tsun cloud, and avoids updates
+solarman.host    = 'iot.talent-monitoring.com'
+solarman.port    = 10000
+
+# mqtt broker configuration
+mqtt.host    = '127.0.0.1' # URL or IP address of the mqtt broker
+mqtt.port    = 1883
+mqtt.user    = 'tsun'
+mqtt.passwd  = 'TSUN'
+
+# home-assistant
+ha.auto_conf_prefix = 'homeassistant'       # MQTT prefix for subscribing for homeassistant status updates
+ha.discovery_prefix = 'homeassistant'       # MQTT prefix for discovery topic 
+ha.entity_prefix    = 'tsun'                # MQTT topic prefix for publishing inverter values
+ha.proxy_node_id    = 'proxy'               # MQTT node id, for the proxy_node_id
+ha.proxy_unique_id  = 'P170000000000001'    # MQTT unique id, to identify a proxy instance
+
+# microinverters
+inverters.allow_all = true   # allow inverters, even if we have no inverter mapping
+
+# inverter mapping, maps a `serial_no* to a `mqtt_id` and defines an optional `suggested_place` for `home-assistant`
+#
+# for each inverter add a block starting with [inverters."<16-digit serial numbeer>"]
+
+[inverters."R17E7409020A009B"] # collector serial
+node_id = 'T17E7409020A009B'   # inverter serial      # Optional, MQTT replacement for inverters serial number
+pv1 = {type = 'JAM54D40', manufacturer = 'Solakon'}   # Optional, PV module descr
+
+[inverters."R17E7605020E0EA2"] # collector serial
+node_id = 'T17E7605020E0EA2'   # inverter serial      # Optional, MQTT replacement for inverters serial number
+pv1 = {type = 'JAM54D40', manufacturer = 'Solakon'}   # Optional, PV module descr
+pv2 = {type = '200W', manufacturer = 'Absaar'}        # Optional, PV module descr
+
+#[inverters."R17xxxxxxxxxxxx2"]
+#node_id = ''                 # Optional, MQTT replacement for inverters serial number
+#suggested_area = ''          # Optional, suggested installation area for home-assistant
+#pv1 = {type = 'RSM40-8-405M', manufacturer = 'Risen'}   # Optional, PV module descr
+#pv2 = {type = 'RSM40-8-405M', manufacturer = 'Risen'}   # Optional, PV module descr
+
+[inverters."Y170000000000001"]
+#monitor_sn = 2000000000      # The "Monitoring SN:" can be found on a sticker enclosed with the inverter
+#node_id = ''                 # Optional, MQTT replacement for inverters serial number
+#suggested_area = ''          # Optional, suggested installation place for home-assistant
+#pv1 = {type = 'RSM40-8-410M', manufacturer = 'Risen'}   # Optional, PV module descr
+#pv2 = {type = 'RSM40-8-410M', manufacturer = 'Risen'}   # Optional, PV module descr
+#pv3 = {type = 'RSM40-8-410M', manufacturer = 'Risen'}   # Optional, PV module descr
+#pv4 = {type = 'RSM40-8-410M', manufacturer = 'Risen'}   # Optional, PV module descr
+
+[gen3plus.at_acl]
+tsun.allow = ['AT+Z', 'AT+UPURL', 'AT+SUPDATE']
+tsun.block = []
+mqtt.allow = ['AT+']
+mqtt.block = []
