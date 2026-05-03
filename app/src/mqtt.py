@@ -51,7 +51,7 @@ class Mqtt(metaclass=Singleton):
     async def publish(self, topic: str, payload: str | bytes | bytearray
                       | int | float | None = None) -> None:
         if self.__client:
-            await self.__client.publish(topic, payload)
+            await self.__client.publish(topic, payload, qos=1)
 
     async def __loop(self) -> None:
         mqtt = Config.get('mqtt')
