@@ -4,7 +4,8 @@
 
 # pip3 install --break-system-packages quart-babel aiomqtt aiocron
 
-SCRIPT_DIR=$(dirname "$(readlink --canonicalize "$0")")
+SCRIPT_FILE=$(readlink --canonicalize "$0")
+SCRIPT_DIR=$(dirname "$SCRIPT_FILE")
 
 export SERVICE_NAME="tsun.proxy.oe"
 VERSION=$(cat "$SCRIPT_DIR/app/.version")

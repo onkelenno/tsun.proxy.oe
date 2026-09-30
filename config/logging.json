@@ -62,7 +62,7 @@
     },
     "file_handler_proxy": {
       "class": "logging.handlers.TimedRotatingFileHandler",
-      "level": "DEBUG",
+      "level": "ERROR",
       "formatter": "file_formatter",
       "filename": "/var/log/tsun.proxy.oe/proxy.log",
       "when": "midnight",
@@ -70,7 +70,7 @@
     },
     "file_handler_trace": {
       "class": "logging.handlers.TimedRotatingFileHandler",
-      "level": "DEBUG",
+      "level": "ERROR",
       "formatter": "file_formatter",
       "filename": "/var/log/tsun.proxy.oe/trace.log",
       "when": "midnight",
